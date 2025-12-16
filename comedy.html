@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Action – BiBi Pop Corn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#050505;color:#fff;overflow-x:hidden;}
+.star{position:fixed;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation:twinkle 2s infinite ease-in-out;z-index:-1;}
+@keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;}}
+header{display:flex;justify-content:space-between;align-items:center;padding:30px 80px;}
+header h1{font-weight:800;letter-spacing:1px;}
+header nav a{color:#aaa;margin:0 15px;text-decoration:none;font-size:14px;}
+header nav a.btn{padding:10px 22px;border-radius:30px;background:#fff;color:#000;font-weight:600;text-decoration:none;}
+main{padding:140px 20px 100px;text-align:center;}
+main h2{font-size:52px;font-weight:800;margin-bottom:40px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:1000px;margin:0 auto;}
+.cards .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:40px;text-align:center;backdrop-filter:blur(10px);transition:0.3s;color:inherit;text-decoration:none;cursor:pointer;}
+.cards .card:hover{background:rgba(0,150,255,0.15);transform:scale(1.05);box-shadow:0 0 30px rgba(0,150,255,0.4);}
+</style>
+</head>
+<body>
+
+<script>
+for(let i=0;i<150;i++){let s=document.createElement("div");s.className="star";s.style.top=Math.random()*100+"vh";s.style.left=Math.random()*100+"vw";s.style.animationDelay=Math.random()*2+"s";document.body.appendChild(s);}
+</script>
+
+<header>
+<h1>BiBi Pop Corn</h1>
+<nav><a href="index.html" class="btn">Back Home</a></nav>
+</header>
+
+<main>
+<h2>Comedy Movies</h2>
+<div class="cards">
+  <div class="card">Action Movie 1</div>
+  <div class="card">Action Movie 2</div>
+  <div class="card">Action Movie 3</div>
+  <div class="card">Action Movie 4</div>
+</div>
+</main>
+
+</body>
+</html>

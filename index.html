@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiBi PoP Corn – Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#050505;color:#fff;overflow-x:hidden;}
+
+/* ⭐ نجوم الخلفية العامة ⭐ */
+.star{position:fixed;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation: twinkle 2s infinite ease-in-out;z-index:-1;}
+@keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+/* ===================== INTRO ===================== */
+#intro{position:fixed;inset:0;background:#000;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:9999;overflow:hidden;}
+.intro-star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation: twinkle 2s infinite ease-in-out;}
+#intro::before{content:"";position:absolute;width:180%;height:180%;background:radial-gradient(circle at center, rgba(0,0,0,0.25), transparent 60%);animation:introGlow 5s infinite ease-in-out;filter:blur(60px);}
+@keyframes introGlow{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+#intro h1{font-size:64px;font-weight:800;letter-spacing:4px;opacity:0;transform:translateY(40px);animation:fadeSlide 1.8s ease forwards 0.4s;position:relative;}
+#intro h1::after{content:"";position:absolute;top:0;left:-150%;width:150%;height:100%;background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);transform:skewX(-25deg);animation:lightSweep 2.5s ease forwards 1s;}
+@keyframes lightSweep{to{ left:150%; }} @keyframes fadeSlide{to{opacity:1;transform:translateY(0);}}
+
+/* =================== MAIN PAGE =================== */
+header{display:flex;justify-content:space-between;align-items:center;padding:30px 80px;}
+header h1{font-weight:800;letter-spacing:1px}
+header nav a{color:#aaa;margin:0 15px;text-decoration:none;font-size:14px;}
+.btn{padding:10px 22px;border-radius:30px;background:#fff;color:#000;font-weight:600;text-decoration:none;}
+.hero{text-align:center;padding:140px 20px 100px;}
+.hero h2{font-size:52px;font-weight:800;line-height:1.2;margin-bottom:20px;}
+.hero p{color:#aaa;max-width:700px;margin:0 auto 40px;}
+.input-box{max-width:700px;margin:0 auto;display:flex;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;backdrop-filter:blur(12px);}
+.input-box input{flex:1;background:transparent;border:none;padding:20px;color:#fff;outline:none;}
+.input-box button{background:#fff;border:none;padding:0 30px;font-weight:600;cursor:pointer;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:1000px;margin:100px auto;padding:0 20px;}
+.stats a.card{display:block;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:40px;text-align:center;backdrop-filter:blur(10px);transition:0.3s;text-decoration:none;color:inherit;cursor:pointer;}
+.stats a.card:hover{background:rgba(0,150,255,0.15);box-shadow:0 0 30px rgba(0,150,255,0.4);transform:scale(1.08);}
+</style>
+</head>
+<body>
+
+<script>
+for(let i=0;i<150;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.top=Math.random()*100+"vh";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDelay = Math.random()*2 + "s";
+  document.body.appendChild(s);
+}
+</script>
+
+<div id="intro">
+  <h1>BiBi Pop Corn</h1>
+</div>
+
+<script>
+for(let i=0;i<120;i++){
+  let s=document.createElement("div");
+  s.className="intro-star";
+  s.style.top=Math.random()*100+"%";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDelay = Math.random()*2 + "s";
+  document.getElementById("intro").appendChild(s);
+}
+</script>
+
+<section class="hero">
+  <h2><br>Welcome To Pop corn !</h2>
+  <p>Just type your fav movie and let bar generate ur link in seconds !</p>
+  <div class="input-box">
+    <input type="text" placeholder="Type your idea...">
+    <button>Generate</button>
+  </div>
+</section>
+
+<section class="stats">
+  <a href="action.html" class="card"><h3>Action</h3></a>
+  <a href="comedy.html" class="card"><h3>Comedy</h3></a>
+  <a href="drama.html" class="card"><h3>Drama</h3></a>
+  <a href="horror.html" class="card"><h3>Horror</h3></a>
+  <a href="cartoon.html" class="card"><h3>Cartoon</h3></a>
+</section>
+
+<script>
+/* إزالة الانترو */
+setTimeout(()=>{
+  const intro=document.getElementById('intro');
+  intro.style.transition='1s ease';
+  intro.style.opacity='0';
+  intro.style.transform='scale(1.1)';
+  setTimeout(()=>intro.remove(),900);
+},3000);
+
+/* تفاعل الكروت – اللون يظهر فقط عند مرور الماوس فوق الكرت */
+</script>
+
+</body>
+</html>
