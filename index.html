@@ -21,31 +21,33 @@ body{background:#050505;color:#fff;overflow-x:hidden;}
 
 /* ===================== INTRO ===================== */
 #intro{position:fixed;inset:0;background:#000;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:9999;overflow:hidden;}
-.intro-star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation: twinkle 2s infinite ease-in-out;}
+.intro-star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation:twinkle 2s infinite ease-in-out;}
 #intro::before{content:"";position:absolute;width:180%;height:180%;background:radial-gradient(circle at center, rgba(0,0,0,0.25), transparent 60%);animation:introGlow 5s infinite ease-in-out;filter:blur(60px);}
 @keyframes introGlow{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+/* Intro text animation */
 #intro h1{font-size:64px;font-weight:800;letter-spacing:4px;opacity:0;transform:translateY(40px);animation:fadeSlide 1.8s ease forwards 0.4s;position:relative;}
 #intro h1::after{content:"";position:absolute;top:0;left:-150%;width:150%;height:100%;background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);transform:skewX(-25deg);animation:lightSweep 2.5s ease forwards 1s;}
 @keyframes lightSweep{to{ left:150%; }} 
 @keyframes fadeSlide{to{opacity:1;transform:translateY(0);}}
 
 /* =================== MAIN PAGE =================== */
-header{display:flex;justify-content:space-between;align-items:center;padding:30px 80px;}
-header h1{font-weight:800;letter-spacing:1px}
-header nav a{color:#aaa;margin:0 15px;text-decoration:none;font-size:14px;}
-.btn{padding:10px 22px;border-radius:30px;background:#fff;color:#000;font-weight:600;text-decoration:none;}
 .hero{text-align:center;padding:140px 20px 100px;}
-.hero h2{font-size:52px;font-weight:800;line-height:1.2;margin-bottom:20px;}
-.hero p{color:#aaa;max-width:700px;margin:0 auto 40px;}
-.input-box{max-width:700px;margin:0 auto;display:flex;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;backdrop-filter:blur(12px);}
+.hero h2{font-size:52px;font-weight:800;margin-bottom:20px;}
+.hero p{color:#aaa;margin-bottom:40px;}
+.input-box{max-width:700px;margin:0 auto;display:flex;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:visible;backdrop-filter:blur(12px);position:relative;}
 .input-box input{flex:1;background:transparent;border:none;padding:20px;color:#fff;outline:none;}
 .input-box button{background:#fff;border:none;padding:0 30px;font-weight:600;cursor:pointer;}
+#suggestions{position:absolute;top:100%;left:0;right:0;background:#0b0b0b;border-radius:14px;margin-top:10px;max-height:300px;overflow-y:auto;display:none;z-index:1000;}
+.suggest-item{display:flex;align-items:center;gap:15px;padding:12px 15px;cursor:pointer;transition:0.3s;}
+.suggest-item:hover{background:rgba(0,150,255,0.15);}
+.suggest-item img{width:45px;height:65px;object-fit:cover;border-radius:8px;}
+.suggest-item span{font-size:14px;}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:1000px;margin:100px auto;padding:0 20px;}
-.stats a.card{display:block;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:40px;text-align:center;backdrop-filter:blur(10px);transition:0.3s;text-decoration:none;color:inherit;cursor:pointer;}
-.stats a.card:hover{background:rgba(0,150,255,0.15);box-shadow:0 0 30px rgba(0,150,255,0.4);transform:scale(1.08);}
+.stats a{display:block;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:40px;text-align:center;text-decoration:none;color:#fff;transition:0.3s;}
+.stats a:hover{background:rgba(0,150,255,0.15);transform:scale(1.08);}
 </style>
 </head>
-
 <body>
 
 <script>
@@ -54,7 +56,6 @@ for(let i=0;i<150;i++){
   s.className="star";
   s.style.top=Math.random()*100+"vh";
   s.style.left=Math.random()*100+"vw";
-  s.style.animationDelay = Math.random()*2 + "s";
   document.body.appendChild(s);
 }
 </script>
@@ -69,30 +70,77 @@ for(let i=0;i<120;i++){
   s.className="intro-star";
   s.style.top=Math.random()*100+"%";
   s.style.left=Math.random()*100+"%";
-  s.style.animationDelay = Math.random()*2 + "s";
   document.getElementById("intro").appendChild(s);
 }
 </script>
 
 <section class="hero">
-  <h2><br>Welcome To bibi pop corn!</h2>
-  <p>Just type your fav movie and let bar generate ur link in seconds !</p>
+  <h2>Welcome To BiBi Pop Corn!</h2>
+  <p>Just type your fav movie and select it to watch!</p>
+
   <div class="input-box">
-    <input type="text" placeholder="Type your idea...">
-    <button>Generate</button>
+    <input type="text" id="searchInput" placeholder="Type movie name..." autocomplete="off">
+    <button onclick="searchMovie()">Generate</button>
+    <div id="suggestions"></div>
   </div>
 </section>
 
 <section class="stats">
-  <a href="action.html" class="card"><h3>Action</h3></a>
-  <a href="comedy.html" class="card"><h3>Comedy</h3></a>
-  <a href="drama.html" class="card"><h3>Drama</h3></a>
-  <a href="horror.html" class="card"><h3>Horror</h3></a>
-  <a href="cartoon.html" class="card"><h3>Cartoon</h3></a>
+  <a href="action.html"><h3>Action</h3></a>
+  <a href="comedy.html"><h3>Comedy</h3></a>
+  <a href="drama.html"><h3>Drama</h3></a>
+  <a href="horror.html"><h3>Horror</h3></a>
+  <a href="cartoon.html"><h3>Cartoon</h3></a>
 </section>
 
 <script>
-/* إزالة الانترو */
+const movies = [
+  { title: "Sonic the Hedgehog 3", image: "img/movie1.png", link: "cartoon.html#movie1" },
+  { title: "Despicable Me 4", image: "img/movie2.jpg", link: "cartoon.html#movie2" },
+  { title: "kpop demon huters", image: "img/movie3.jpg", link: "cartoon.html#movie3" },
+  { title: "Cartoon Movie 4", image: "img/movie4.jpg", link: "cartoon.html#movie4" },
+  // أضف باقي الأفلام من بقية الصفحات بنفس النمط
+];
+
+const input = document.getElementById("searchInput");
+const suggestions = document.getElementById("suggestions");
+
+input.addEventListener("input", ()=>{
+  const q = input.value.trim().toLowerCase();
+  if(q.length < 1){
+    suggestions.style.display = "none";
+    return;
+  }
+
+  suggestions.innerHTML = "";
+  const filtered = movies.filter(m => m.title.toLowerCase().includes(q)).slice(0,5);
+
+  filtered.forEach(m => {
+    const div = document.createElement("div");
+    div.className = "suggest-item";
+    div.innerHTML = `<img src="${m.image}"><span>${m.title}</span>`;
+    div.onclick = () => {
+      input.value = m.title;
+      suggestions.style.display = "none";
+    };
+    suggestions.appendChild(div);
+  });
+
+  suggestions.style.display = filtered.length ? "block" : "none";
+});
+
+function searchMovie(){
+  const q = input.value.trim();
+  if(q==="") return;
+  const movie = movies.find(m => m.title.toLowerCase() === q.toLowerCase());
+  if(movie){
+    window.location.href = movie.link;
+  } else {
+    alert("Movie not found in the site 😅");
+  }
+}
+
+/* الانترو كما كان سابقًا */
 setTimeout(()=>{
   const intro=document.getElementById('intro');
   intro.style.transition='1s ease';
@@ -104,4 +152,3 @@ setTimeout(()=>{
 
 </body>
 </html>
-
