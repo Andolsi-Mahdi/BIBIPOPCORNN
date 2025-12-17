@@ -6,6 +6,8 @@
 <title>Cartoon – BiBi Pop Corn</title>
 
 <link rel="icon" type="img" href="img/691-6917203_computer-icons-clapperboard-film-animation-clapperboard-png-transparent-removebg-preview.png">
+<link rel="icon" href="img/691-6917203_computer-icons-clapperboard-film-animation-clapperboard-png-transparent-removebg-preview.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -20,28 +22,18 @@ body{background:#050505;color:#fff;overflow-x:hidden;}
 #intro{position:fixed;inset:0;background:#000;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:9999;overflow:hidden;}
 .intro-star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation:twinkle 2s infinite ease-in-out;}
 #intro::before{content:"";position:absolute;width:180%;height:180%;background:radial-gradient(circle at center, rgba(0,0,0,0.25), transparent 60%);animation:introGlow 5s infinite ease-in-out;filter:blur(60px);}
-@keyframes introGlow{0%,100%{transform:scale(1);}50%{transform:scale(1.15);} }
+@keyframes introGlow{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+/* intro text */
 #intro h1{font-size:64px;font-weight:800;letter-spacing:4px;opacity:0;transform:translateY(40px);animation:fadeSlide 1.8s ease forwards 0.4s;position:relative;}
 #intro h1::after{content:"";position:absolute;top:0;left:-150%;width:150%;height:100%;background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);transform:skewX(-25deg);animation:lightSweep 2.5s ease forwards 1s;}
 @keyframes lightSweep{to{ left:150%; }} 
 @keyframes fadeSlide{to{opacity:1;transform:translateY(0);}}
 
 /* main */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:30px 80px;
-}
+header{display:flex;justify-content:space-between;align-items:center;padding:30px 80px;}
 header h1{font-weight:800}
-header a.btn{
-  padding:10px 22px;
-  background:#fff;
-  color:#000;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:600;
-}
+header a.btn{padding:10px 22px;background:#fff;color:#000;border-radius:30px;text-decoration:none;font-weight:600;}
 main{padding:140px 20px 100px;text-align:center;}
 main h2{font-size:52px;font-weight:800;margin-bottom:40px;}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;max-width:1200px;margin:0 auto;position:relative;}
@@ -52,52 +44,20 @@ main h2{font-size:52px;font-weight:800;margin-bottom:40px;}
 .card-content{padding:15px;text-align:left;}
 .card-content h3{font-size:18px;margin-bottom:6px;}
 .card-content p{font-size:14px;color:#aaa;margin-bottom:12px;}
-.card-content a{
-  display:inline-block;
-  padding:10px 18px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:600;
-  margin-right:8px;
-  transition:0.3s;
-}
-.card-content .watch-btn{
-  background:rgba(255,255,255,0.1);
-  color:#fff;
-  backdrop-filter:blur(12px);
-}
-.card-content .watch-btn:hover{background:rgba(255,255,255,0.2);}
-.card-content .trailer-btn{
-  background:#ff7f50;
-  color:#fff;
-}
+.card-content a{display:inline-block;padding:10px 18px;border-radius:12px;text-decoration:none;font-weight:600;margin-right:8px;transition:0.3s;}
+.card-content .watch-btn{background:#00a8ff;color:#fff;}
+.card-content .watch-btn:hover{background:#0086cc;}
+.card-content .trailer-btn{background:#ff7f50;color:#fff;}
 .card-content .trailer-btn:hover{background:#e0653c;}
 
-/* شاشة الأجزاء */
-.parts-screen{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  backdrop-filter:blur(12px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-  flex-direction:column;
-  padding:20px;
-}
-.parts-screen h3{margin-bottom:20px;}
-.parts-list{display:flex;gap:15px;flex-wrap:wrap;}
-.parts-list a{
-  padding:10px 18px;
-  background:#00a8ff;
-  color:#fff;
-  text-decoration:none;
-  border-radius:12px;
-  font-weight:600;
-}
-.parts-list a:hover{background:#0086cc;}
-.close-parts{position:absolute;top:20px;right:20px;color:#fff;font-size:24px;cursor:pointer;}
+/* popup glassmorphism */
+#popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(6px);display:none;justify-content:center;align-items:center;z-index:10000;}
+#popup{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(12px);padding:30px 40px;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:15px;max-width:400px;width:90%;}
+#popup h3{margin-bottom:20px;}
+.part-btn{background:#00a8ff;color:#fff;padding:10px 20px;border-radius:12px;text-decoration:none;font-weight:600;width:100%;text-align:center;transition:0.3s;}
+.part-btn:hover{background:#0086cc;}
+#close-popup{background:#ff3b3b;color:#fff;padding:10px 20px;border-radius:12px;border:none;font-weight:600;cursor:pointer;transition:0.3s;}
+#close-popup:hover{background:#cc3232;}
 </style>
 </head>
 <body>
@@ -137,34 +97,33 @@ for(let i=0;i<120;i++){
 
 <!-- Movie 1 -->
 <div class="card">
-  <img src="img/movie1.png" alt="Sonic 3">
+  <img src="img/movie1.png" alt="Sonic">
   <video class="trailer" src="trailer/Sonic the Hedgehog 3 _ Official Trailer (2024 Movie) Ben Schwartz, Jim Carrey, Keanu Reeves.mp4" controls></video>
   <div class="card-content">
-    <h3>Sonic the Hedgehog </h3>
+    <h3>Sonic the Hedgehog 3</h3>
     <p>By egyDead</p>
-    <a href="#" class="trailer-btn">Trailer 3</a>
+    <a href="#" class="trailer-btn">Trailer</a>
     <a href="#" class="watch-btn" data-parts='[
-      {"name":"Sonic the Hedgehog 1","link":"*********************************************"},
-      {"name":"Sonic the Hedgehog 2","link":"*********************************************"},
-      {"name":"Sonic the Hedgehog 3","link":"https://drive.google.com/file/d/1gVySmHu_21GViHhz5hVVy1nwNQc0O0zg/view"}
+      {"name":"Sonic the Hedgehog 1","link":"https://drive.google.com/file/d/1gVySmHu_21GViHhz5hVVy1nwNQc0O0zg/view"},
+      {"name":"Sonic the Hedgehog 2","link":"https://drive.google.com/file/d/1abc123456/view"},
+      {"name":"Sonic the Hedgehog 3","link":"https://drive.google.com/file/d/1def456789/view"}
     ]'>Watch / Download</a>
   </div>
 </div>
-
 
 <!-- Movie 2 -->
 <div class="card">
   <img src="img/movie2.jpg" alt="Despicable Me 4">
   <video class="trailer" src="trailer/Despicable Me 4  Official Trailer.mp4" controls></video>
   <div class="card-content">
-    <h3>Despicable Me</h3>
+    <h3>Despicable Me 4</h3>
     <p>By toktokciema</p>
-    <a href="#" class="trailer-btn">Trailer 4</a>
+    <a href="#" class="trailer-btn">Trailer</a>
     <a href="#" class="watch-btn" data-parts='[
       {"name":"Despicable Me 1","link":"https://drive.google.com/file/d/15dpgePAK0WcmaXgPGE4yzbQjfLDHziPz/view"},
       {"name":"Despicable Me 2","link":"https://drive.google.com/file/d/15dpgePAK0WcmaXgPGE4yzbQjfLDHziPz/view"},
       {"name":"Despicable Me 3","link":"https://drive.google.com/file/d/15dpgePAK0WcmaXgPGE4yzbQjfLDHziPz/view"},
-      {"name":"Despicable Me 4","link":"https://drive.google.com/file/d/15abc456/view"}
+      {"name":"Despicable Me 4","link":"https://drive.google.com/file/d/15dpgePAK0WcmaXgPGE4yzbQjfLDHziPz/view"}
     ]'>Watch / Download</a>
   </div>
 </div>
@@ -178,7 +137,7 @@ for(let i=0;i<120;i++){
     <p>By wecima</p>
     <a href="#" class="trailer-btn">Trailer</a>
     <a href="#" class="watch-btn" data-parts='[
-      {"name":"Kpop Demon Hunters","link":"https://drive.google.com/file/d/1Pv_05b02klitqSec_9rlE8ASBtfodNQD/view"}
+      {"name":"Kpop demon hunters","link":"https://drive.google.com/file/d/1Pv_05b02klitqSec_9rlE8ASBtfodNQD/view"}
     ]'>Watch / Download</a>
   </div>
 </div>
@@ -189,7 +148,7 @@ for(let i=0;i<120;i++){
   <video class="trailer" src="trailer/Elio  Official Trailer.mp4" controls></video>
   <div class="card-content">
     <h3>Elio 2025</h3>
-    <p>By bibi pop corn</p>
+    <p>By BIBI Pop Corn</p>
     <a href="#" class="trailer-btn">Trailer</a>
     <a href="#" class="watch-btn" data-parts='[
       {"name":"Elio 2025","link":"https://drive.google.com/file/d/153YFzBBN0M2qC6UrpXLV06C_Q64GOz9H/view"}
@@ -200,16 +159,17 @@ for(let i=0;i<120;i++){
 </div>
 </main>
 
-<!-- شاشة الأجزاء -->
-<div class="parts-screen" id="partsScreen">
-  <span class="close-parts" id="closeParts">&times;</span>
-  <h3>Choose Part / Episode</h3>
-  <div class="parts-list" id="partsList"></div>
+<!-- Popup -->
+<div id="popup-overlay">
+  <div id="popup">
+    <h3>Choose Part</h3>
+    <div id="parts-container" style="display:flex;flex-direction:column;gap:10px;width:100%;"></div>
+    <button id="close-popup">Close</button>
+  </div>
 </div>
 
 <script>
 /* تشغيل وإغلاق التريلر */
-let currentTrailer = null;
 document.querySelectorAll(".trailer-btn").forEach(btn => {
   btn.addEventListener("click", e => {
     e.preventDefault();
@@ -217,51 +177,48 @@ document.querySelectorAll(".trailer-btn").forEach(btn => {
     const video = card.querySelector(".trailer");
     const img = card.querySelector("img");
 
-    if(currentTrailer && currentTrailer !== video){
-      currentTrailer.pause();
-      currentTrailer.style.display = "none";
-      currentTrailer.previousElementSibling.style.opacity = "1";
-      document.querySelectorAll(".trailer-btn").forEach(b => b.textContent="Trailer");
-    }
-
     if(video.style.display === "none"){
+      // أغلق أي تريلر آخر مفتوح
+      document.querySelectorAll(".trailer").forEach(v=>{
+        v.pause();
+        v.style.display="none";
+        if(v.closest(".card")) v.closest(".card").querySelector("img").style.opacity="1";
+      });
+
       video.style.display = "block";
       img.style.opacity = "0";
       video.play();
       btn.textContent = "Close Trailer";
-      currentTrailer = video;
     } else {
       video.pause();
       video.style.display = "none";
       img.style.opacity = "1";
       btn.textContent = "Trailer";
-      currentTrailer = null;
     }
   });
 });
 
-/* Watch / Download */
-const partsScreen = document.getElementById("partsScreen");
-const partsList = document.getElementById("partsList");
-document.querySelectorAll(".watch-btn").forEach(btn=>{
-  btn.addEventListener("click", e=>{
+/* popup Watch / Download */
+const popupOverlay = document.getElementById("popup-overlay");
+const partsContainer = document.getElementById("parts-container");
+document.querySelectorAll(".watch-btn").forEach(btn => {
+  btn.addEventListener("click", e => {
     e.preventDefault();
-    const parts = JSON.parse(btn.getAttribute("data-parts"));
-    partsList.innerHTML = "";
+    partsContainer.innerHTML="";
+    const parts = JSON.parse(btn.dataset.parts);
     parts.forEach(p=>{
       const a = document.createElement("a");
-      a.href = p.link;
+      a.href=p.link;
       a.target="_blank";
-      a.textContent = p.name;
-      partsList.appendChild(a);
+      a.className="part-btn";
+      a.textContent=p.name;
+      partsContainer.appendChild(a);
     });
-    partsScreen.style.display = "flex";
+    popupOverlay.style.display="flex";
   });
 });
-
-/* إغلاق شاشة الأجزاء */
-document.getElementById("closeParts").addEventListener("click",()=>{
-  partsScreen.style.display="none";
+document.getElementById("close-popup").addEventListener("click", ()=>{
+  popupOverlay.style.display="none";
 });
 
 /* الانترو */
@@ -272,15 +229,6 @@ setTimeout(()=>{
   intro.style.transform='scale(1.1)';
   setTimeout(()=>intro.remove(),900);
 },3000);
-
-/* نجوم خلفية الانترو */
-for(let i=0;i<120;i++){
-  const s=document.createElement("div");
-  s.className="intro-star";
-  s.style.top=Math.random()*100+"%";
-  s.style.left=Math.random()*100+"%";
-  document.getElementById("intro").appendChild(s);
-}
 </script>
 
 </body>
