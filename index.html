@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BiBi PoP Corn – Home</title>
+
+<!-- ⭐ FAVICON (غيّر الصورة فقط) ⭐ -->
+<link rel="icon" type="img" href="img/691-6917203_computer-icons-clapperboard-film-animation-clapperboard-png-transparent-removebg-preview.png">
+<link rel="icon" href="img/691-6917203_computer-icons-clapperboard-film-animation-clapperboard-png-transparent-removebg-preview.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 body{background:#050505;color:#fff;overflow-x:hidden;}
@@ -20,7 +26,8 @@ body{background:#050505;color:#fff;overflow-x:hidden;}
 @keyframes introGlow{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
 #intro h1{font-size:64px;font-weight:800;letter-spacing:4px;opacity:0;transform:translateY(40px);animation:fadeSlide 1.8s ease forwards 0.4s;position:relative;}
 #intro h1::after{content:"";position:absolute;top:0;left:-150%;width:150%;height:100%;background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);transform:skewX(-25deg);animation:lightSweep 2.5s ease forwards 1s;}
-@keyframes lightSweep{to{ left:150%; }} @keyframes fadeSlide{to{opacity:1;transform:translateY(0);}}
+@keyframes lightSweep{to{ left:150%; }} 
+@keyframes fadeSlide{to{opacity:1;transform:translateY(0);}}
 
 /* =================== MAIN PAGE =================== */
 header{display:flex;justify-content:space-between;align-items:center;padding:30px 80px;}
@@ -38,6 +45,7 @@ header nav a{color:#aaa;margin:0 15px;text-decoration:none;font-size:14px;}
 .stats a.card:hover{background:rgba(0,150,255,0.15);box-shadow:0 0 30px rgba(0,150,255,0.4);transform:scale(1.08);}
 </style>
 </head>
+
 <body>
 
 <script>
@@ -67,7 +75,7 @@ for(let i=0;i<120;i++){
 </script>
 
 <section class="hero">
-  <h2><br>Welcome To Bibi Pop corn !</h2>
+  <h2><br>Welcome To bibi pop corn!</h2>
   <p>Just type your fav movie and let bar generate ur link in seconds !</p>
   <div class="input-box">
     <input type="text" placeholder="Type your idea...">
@@ -92,10 +100,8 @@ setTimeout(()=>{
   intro.style.transform='scale(1.1)';
   setTimeout(()=>intro.remove(),900);
 },3000);
-
-/* تفاعل الكروت – اللون يظهر فقط عند مرور الماوس فوق الكرت */
 </script>
 
 </body>
-
 </html>
+
