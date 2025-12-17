@@ -4,24 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cartoon – BiBi Pop Corn</title>
+
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#050505;color:#fff;overflow-x:hidden}
+body{background:#050505;color:#fff;overflow-x:hidden;}
 
 /* stars */
-.star{
-  position:fixed;
-  width:2px;height:2px;
-  background:#fff;
-  border-radius:50%;
-  opacity:.8;
-  animation:twinkle 2s infinite ease-in-out;
-  z-index:-1;
-}
+.star{position:fixed;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.8;animation:twinkle 2s infinite ease-in-out;z-index:-1;}
 @keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
 
+/* intro */
+#intro{position:fixed;inset:0;background:#000;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:9999;overflow:hidden;}
+.intro-star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation:twinkle 2s infinite ease-in-out;}
+#intro::before{content:"";position:absolute;width:180%;height:180%;background:radial-gradient(circle at center, rgba(0,0,0,0.25), transparent 60%);animation:introGlow 5s infinite ease-in-out;filter:blur(60px);}
+@keyframes introGlow{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+#intro h1{font-size:64px;font-weight:800;letter-spacing:4px;opacity:0;transform:translateY(40px);animation:fadeSlide 1.8s ease forwards 0.4s;position:relative;}
+#intro h1::after{content:"";position:absolute;top:0;left:-150%;width:150%;height:100%;background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);transform:skewX(-25deg);animation:lightSweep 2.5s ease forwards 1s;}
+@keyframes lightSweep{to{ left:150%; }} 
+@keyframes fadeSlide{to{opacity:1;transform:translateY(0);}}
+
+/* main */
 header{
   display:flex;
   justify-content:space-between;
@@ -37,68 +42,37 @@ header a.btn{
   text-decoration:none;
   font-weight:600;
 }
-
-main{
-  padding:140px 20px 100px;
-  text-align:center;
-}
-main h2{
-  font-size:52px;
-  font-weight:800;
-  margin-bottom:40px;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
-  max-width:1200px;
-  margin:0 auto;
-}
-
-/* EgyBest style */
-.card{
-  background:#111;
-  border-radius:12px;
-  overflow:hidden;
-  transition:.3s;
-  box-shadow:0 0 20px rgba(0,0,0,.5);
-}
-.card:hover{transform:scale(1.04)}
-
-.card img{
-  width:100%;
-  height:320px;
-  object-fit:cover;
-}
-
-.card-content{
-  padding:15px;
-  text-align:left;
-}
-.card-content h3{
-  font-size:18px;
-  margin-bottom:6px;
-}
-.card-content p{
-  font-size:14px;
-  color:#aaa;
-  margin-bottom:12px;
-}
-
+main{padding:140px 20px 100px;text-align:center;}
+main h2{font-size:52px;font-weight:800;margin-bottom:40px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;max-width:1200px;margin:0 auto;position:relative;}
+.card{background:#111;border-radius:12px;overflow:hidden;transition:.3s;box-shadow:0 0 20px rgba(0,0,0,.5);position:relative;}
+.card:hover{transform:scale(1.04);}
+.card img{width:100%;height:320px;object-fit:cover;display:block;transition:0.3s;}
+.card video.trailer{display:none;width:100%;height:320px;object-fit:cover;position:absolute;top:0;left:0;z-index:10;background:#000;border:none;}
+.card-content{padding:15px;text-align:left;}
+.card-content h3{font-size:18px;margin-bottom:6px;}
+.card-content p{font-size:14px;color:#aaa;margin-bottom:12px;}
 .card-content a{
   display:inline-block;
-  padding:9px 15px;
-  background:#00a8ff;
-  color:#fff;
-  border-radius:8px;
+  padding:10px 18px;
+  border-radius:12px;
   text-decoration:none;
   font-weight:600;
+  margin-right:8px;
+  transition:0.3s;
 }
-.card-content a:hover{background:#0086cc}
+.card-content .watch-btn{
+  background:#00a8ff;
+  color:#fff;
+}
+.card-content .watch-btn:hover{background:#0086cc;}
+.card-content .trailer-btn{
+  background:#ff7f50;
+  color:#fff;
+}
+.card-content .trailer-btn:hover{background:#e0653c;}
 </style>
 </head>
-
 <body>
 
 <script>
@@ -107,8 +81,21 @@ for(let i=0;i<150;i++){
   s.className="star";
   s.style.top=Math.random()*100+"vh";
   s.style.left=Math.random()*100+"vw";
-  s.style.animationDelay=Math.random()*2+"s";
   document.body.appendChild(s);
+}
+</script>
+
+<div id="intro">
+  <h1>BiBi Pop Corn</h1>
+</div>
+
+<script>
+for(let i=0;i<120;i++){
+  const s=document.createElement("div");
+  s.className="intro-star";
+  s.style.top=Math.random()*100+"%";
+  s.style.left=Math.random()*100+"%";
+  document.getElementById("intro").appendChild(s);
 }
 </script>
 
@@ -119,51 +106,52 @@ for(let i=0;i<150;i++){
 
 <main>
 <h2>Cartoon Movies</h2>
-
 <div class="cards">
 
 <!-- Movie 1 -->
 <div class="card">
   <img src="img/movie1.png" alt="Sonic 3">
+  <video class="trailer" src="trailer/sonic3.mp4" controls></video>
   <div class="card-content">
     <h3>Sonic the Hedgehog 3 </h3>
-    <p>By egyDead <p>
-    <a href="https://drive.google.com/file/d/1gVySmHu_21GViHhz5hVVy1nwNQc0O0zg/view" target="_blank">
-      Watch / Download
-    </a>
+    <p>By egyDead.com</p>
+    <a href="#" class="trailer-btn">Trailer</a>
+    <a href="https://drive.google.com/file/d/1gVySmHu_21GViHhz5hVVy1nwNQc0O0zg/view" target="_blank" class="watch-btn">Watch / Download</a>
   </div>
 </div>
 
 <!-- Movie 2 -->
 <div class="card">
   <img src="img/movie2.jpg" alt="Despicable Me 4">
+  <video class="trailer" src="trailer/despicable4.mp4" controls></video>
   <div class="card-content">
     <h3>Despicable Me 4</h3>
     <p>By toktokciema</p>
-    <a href="https://drive.google.com/file/d/15dpgePAK0WcmaXgPGE4yzbQjfLDHziPz/view" target="_blank">
-      Watch / Download
-    </a>
+    <a href="#" class="trailer-btn">Trailer</a>
+    <a href="https://drive.google.com/file/d/15dpgePAK0WcmaXgPGE4yzbQjfLDHziPz/view" target="_blank" class="watch-btn">Watch / Download</a>
   </div>
 </div>
 
 <!-- Movie 3 -->
 <div class="card">
-  <img src="img/movie3.jpg"alt="kpop demon huters">
+  <img src="img/movie3.jpg" alt="kpop demon hunters">
+  <video class="trailer" src="trailer/kpopdemon.mp4" controls></video>
   <div class="card-content">
-    <h3>kpop demon huters<h3>
-    <p>by wecima</p>
-    <a href="https://drive.google.com/file/d/1Pv_05b02klitqSec_9rlE8ASBtfodNQD/view?usp=drive_link" target="_blank">
-      Watch / Download
-     </a>
+    <h3>kpop demon hunters</h3>
+    <p>By wecima</p>
+    <a href="#" class="trailer-btn">Trailer</a>
+    <a href="https://drive.google.com/file/d/1Pv_05b02klitqSec_9rlE8ASBtfodNQD/view?usp=drive_link" target="_blank" class="watch-btn">Watch / Download</a>
   </div>
 </div>
 
 <!-- Movie 4 -->
 <div class="card">
-  <img src="img/movie4.jpg" alt="">
+  <img src="img/movie4.jpg" alt="Cartoon Movie 4">
+  <video class="trailer" src="trailer/cartoon4.mp4" controls></video>
   <div class="card-content">
     <h3>Cartoon Movie 4</h3>
     <p>Animation</p>
+    <a href="#" class="trailer-btn">Trailer</a>
     <a href="#">Coming Soon</a>
   </div>
 </div>
@@ -171,7 +159,38 @@ for(let i=0;i<150;i++){
 </div>
 </main>
 
+<script>
+/* تشغيل وإغلاق التريلر */
+document.querySelectorAll(".trailer-btn").forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
+    const card = btn.closest(".card");
+    const video = card.querySelector(".trailer");
+    const img = card.querySelector("img");
+
+    if(video.style.display === "none"){
+      video.style.display = "block";
+      img.style.opacity = "0";
+      video.play();
+      btn.textContent = "Close Trailer";
+    } else {
+      video.pause();
+      video.style.display = "none";
+      img.style.opacity = "1";
+      btn.textContent = "Trailer";
+    }
+  });
+});
+
+/* الانترو */
+setTimeout(()=>{
+  const intro=document.getElementById('intro');
+  intro.style.transition='1s ease';
+  intro.style.opacity='0';
+  intro.style.transform='scale(1.1)';
+  setTimeout(()=>intro.remove(),900);
+},3000);
+</script>
+
 </body>
 </html>
-
-
