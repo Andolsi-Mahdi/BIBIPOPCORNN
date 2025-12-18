@@ -3,21 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BiBi PoP Corn – Home</title>
+<title> PoP Corn – Home</title>
 
-<!-- ⭐ FAVICON (غيّر الصورة فقط) ⭐ -->
 <link rel="icon" type="img" href="img/691-6917203_computer-icons-clapperboard-film-animation-clapperboard-png-transparent-removebg-preview.png">
-<link rel="icon" href="img/691-6917203_computer-icons-clapperboard-film-animation-clapperboard-png-transparent-removebg-preview.png">
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 body{background:#050505;color:#fff;overflow-x:hidden;}
 
-/* ⭐ نجوم الخلفية العامة ⭐ */
-.star{position:fixed;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation: twinkle 2s infinite ease-in-out;z-index:-1;}
+/* ⭐ النجوم ⭐ */
+.star{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  opacity:0.8;
+  z-index:-1;
+  animation: twinkle 2s infinite ease-in-out;
+}
 @keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+/* ⭐ شهب ⭐ */
+.shooting-star{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  opacity:0.9;
+  z-index:0;
+  animation: shoot 1.2s linear forwards;
+}
+@keyframes shoot{
+  0%{transform:translate(0,0);opacity:1;}
+  80%{opacity:1;}
+  100%{transform:translate(-300px,100vh);opacity:0;}
+}
 
 /* ===================== INTRO ===================== */
 #intro{position:fixed;inset:0;background:#000;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:9999;overflow:hidden;}
@@ -50,18 +73,33 @@ body{background:#050505;color:#fff;overflow-x:hidden;}
 </head>
 <body>
 
+<!-- ⭐ نجوم متوهجة ⭐ -->
 <script>
 for(let i=0;i<150;i++){
   let s=document.createElement("div");
   s.className="star";
   s.style.top=Math.random()*100+"vh";
   s.style.left=Math.random()*100+"vw";
+  s.style.animationDelay=Math.random()*2+"s"; // كل نجمة تتوهج بشكل مستقل
   document.body.appendChild(s);
+}
+
+// شهب 5 فقط بمواقع وأوقات مختلفة
+for(let i=0;i<5;i++){
+  setTimeout(()=>{
+    let star=document.createElement("div");
+    star.className="shooting-star";
+    star.style.top=Math.random()*50+"vh";
+    star.style.left=Math.random()*100+"vw";
+    document.body.appendChild(star);
+    // إزالة الشهاب بعد انتهاء الحركة
+    setTimeout(()=>star.remove(),1500);
+  }, i*1000 + Math.random()*2000);
 }
 </script>
 
 <div id="intro">
-  <h1>BiBi Pop Corn</h1>
+  <h1> Pop Corn</h1>
 </div>
 
 <script>
@@ -75,7 +113,7 @@ for(let i=0;i<120;i++){
 </script>
 
 <section class="hero">
-  <h2>Welcome To BiBi Pop Corn!</h2>
+  <h2>Welcome To Pop Corn!</h2>
   <p>Just type your fav movie and select it to watch!</p>
 
   <div class="input-box">
@@ -99,7 +137,6 @@ const movies = [
   { title: "Despicable Me 4", image: "img/movie2.jpg", link: "cartoon.html#movie2" },
   { title: "kpop demon huters", image: "img/movie3.jpg", link: "cartoon.html#movie3" },
   { title: "Elio 2025", image: "img/movie4.jpg", link: "cartoon.html#movie4" },
-  // أضف باقي الأفلام من بقية الصفحات بنفس النمط
 ];
 
 const input = document.getElementById("searchInput");
@@ -107,10 +144,7 @@ const suggestions = document.getElementById("suggestions");
 
 input.addEventListener("input", ()=>{
   const q = input.value.trim().toLowerCase();
-  if(q.length < 1){
-    suggestions.style.display = "none";
-    return;
-  }
+  if(q.length < 1){ suggestions.style.display = "none"; return; }
 
   suggestions.innerHTML = "";
   const filtered = movies.filter(m => m.title.toLowerCase().includes(q)).slice(0,5);
@@ -119,10 +153,7 @@ input.addEventListener("input", ()=>{
     const div = document.createElement("div");
     div.className = "suggest-item";
     div.innerHTML = `<img src="${m.image}"><span>${m.title}</span>`;
-    div.onclick = () => {
-      input.value = m.title;
-      suggestions.style.display = "none";
-    };
+    div.onclick = () => { input.value = m.title; suggestions.style.display = "none"; };
     suggestions.appendChild(div);
   });
 
@@ -133,14 +164,11 @@ function searchMovie(){
   const q = input.value.trim();
   if(q==="") return;
   const movie = movies.find(m => m.title.toLowerCase() === q.toLowerCase());
-  if(movie){
-    window.location.href = movie.link;
-  } else {
-    alert("Movie not found in the site 😅");
-  }
+  if(movie){ window.location.href = movie.link; } 
+  else { alert("Movie not found in the site 😅"); }
 }
 
-/* الانترو كما كان سابقًا */
+/* الانترو */
 setTimeout(()=>{
   const intro=document.getElementById('intro');
   intro.style.transition='1s ease';
